@@ -9,8 +9,5 @@ import java.util.Optional;
 
 public interface UserDao extends JpaRepository<User, Long> {
 
-//    @Override
-//    Optional<User> findById(Long aLong);
-
     Optional<User> findByUsername(String username);
 }

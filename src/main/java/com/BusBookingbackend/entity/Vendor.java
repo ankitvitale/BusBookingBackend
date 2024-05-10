@@ -21,24 +21,7 @@ public class Vendor implements Serializable{
     private String doc1;
     private String doc2;
     private String password;
-
-    private String verification_status;
-
-//    public Blob getDoc1() {
-//        return doc1;
-//    }
-//
-//    public void setDoc1(Blob doc1) {
-//        this.doc1 = doc1;
-//    }
-//
-//    public Blob getDoc2() {
-//        return doc2;
-//    }
-//
-//    public void setDoc2(Blob doc2) {
-//        this.doc2 = doc2;
-//    }
+    private Boolean verification_status;
 
     public Set<Role> getRole() {
         return Role;
@@ -107,22 +90,6 @@ public class Vendor implements Serializable{
         this.address = address;
     }
 
-//    public MultipartFile getDoc1() {
-//        return doc1;
-//    }
-//
-//    public void setDoc1(MultipartFile doc1) {
-//        this.doc1 = doc1;
-//    }
-//
-//    public MultipartFile getDoc2() {
-//        return doc2;
-//    }
-//
-//    public void setDoc2(MultipartFile doc2) {
-//        this.doc2 = doc2;
-//    }
-
     public String getPassword() {
         return password;
     }
@@ -130,12 +97,27 @@ public class Vendor implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getDoc1() {
+        return doc1;
+    }
 
-    public String getVerification_status() {
+    public void setDoc1(String doc1) {
+        this.doc1 = doc1;
+    }
+
+    public String getDoc2() {
+        return doc2;
+    }
+
+    public void setDoc2(String doc2) {
+        this.doc2 = doc2;
+    }
+
+    public Boolean getVerification_status() {
         return verification_status;
     }
 
-    public void setVerification_status(String verification_status) {
+    public void setVerification_status(Boolean verification_status) {
         this.verification_status = verification_status;
     }
 
@@ -146,18 +128,4 @@ public class Vendor implements Serializable{
     public Vendor() {
     }
 
-    public Vendor(String username, String email, String phone_number, String organization_name, String address, MultipartFile doc1, MultipartFile doc2, String password, String verification_status) {
-        this.username = username;
-        this.email = email;
-        this.phone_number = phone_number;
-        this.organization_name = organization_name;
-        this.address = address;
-//        this.doc1 = doc1;
-//        this.doc2 = doc2;
-        this.password = password;
-        this.verification_status = verification_status;
-    }
-
-    // Getters and setters
-    // Omitted for brevity, but you should provide getters and setters for all properties
 }

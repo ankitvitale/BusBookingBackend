@@ -7,9 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.BusBookingbackend.entity.Vendor;
 
-@Repository
-public interface VenderDao extends JpaRepository<Vendor, String> {
+import java.util.Optional;
 
-	//Optional<Vender> findById(String username);
+@Repository
+public interface VendorDao extends JpaRepository<Vendor, String> {
+
+	//Optional<Vende\r> findById(String username);
+    Optional<Vendor> findByUsername(String username);
 
 }
