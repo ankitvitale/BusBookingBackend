@@ -1,31 +1,31 @@
-//package com.BusBookingbackend.service;
-//
-//import java.util.HashSet;
-//import java.util.Set;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Service;
-//
-//import com.BusBookingbackend.dao.RoleDao;
-//import com.BusBookingbackend.dao.VenderDao;
-//import com.BusBookingbackend.entity.Role;
-//import com.BusBookingbackend.entity.Vender;
-//
-//@Service
-//public class VenderService {
-//
-//	
-//
-//    @Autowired
-//    private VenderDao venderDao;
-//
-//    @Autowired
-//    private RoleDao roleDao;
-//
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
+package com.BusBookingbackend.service;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.BusBookingbackend.dao.RoleDao;
+import com.BusBookingbackend.dao.VenderDao;
+import com.BusBookingbackend.entity.Role;
+import com.BusBookingbackend.entity.Vendor;
+
+@Service
+public class VenderService {
+
+
+
+    @Autowired
+    private VenderDao venderDao;
+
+    @Autowired
+    private RoleDao roleDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 //    public void initRoleAndVender() {
 //
 //        Role adminRole = new Role();
@@ -37,7 +37,7 @@
 //        VenderRole.setRoleName("Vender");
 //        VenderRole.setRoleDescription("Default role for newly created record");
 //        roleDao.save(VenderRole);
-//        
+//
 //        Vender adminVender =new Vender();
 //        adminVender.setUsername("admin123");
 //        adminVender.setPassword(getEncodedPassword("admin@pass"));
@@ -72,19 +72,19 @@
 ////        user.setRole(userRoles);
 ////        userDao.save(user);
 //    }
-//
-//    public Vender registerNewVender(Vender vender) {
-//        Role role = roleDao.findById("Vender").get();
-//        Set<Role> venderRoles = new HashSet<>();
-//        venderRoles.add(role);
-//        vender.setRole(venderRoles);
-//        vender.setConfirom_password(getEncodedPassword(vender.getConfirom_password()));
-//
-//        return venderDao.save(vender);
-//    }
-//
-//    public String getEncodedPassword(String password) {
-//        return passwordEncoder.encode(password);
-//    }
-//}
-//
+
+    public Vendor registerNewVender(Vendor vender) {
+        Role role = roleDao.findById("Vendor").get();
+        Set<Role> venderRoles = new HashSet<>();
+        venderRoles.add(role);
+        vender.setRole(venderRoles);
+        vender.setPassword(getEncodedPassword(vender.getPassword()));
+
+        return venderDao.save(vender);
+    }
+
+    public String getEncodedPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+}
+

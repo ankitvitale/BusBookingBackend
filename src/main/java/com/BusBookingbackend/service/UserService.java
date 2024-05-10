@@ -1,6 +1,7 @@
 package com.BusBookingbackend.service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +27,64 @@ public class UserService {
 	    private PasswordEncoder passwordEncoder;
 
 	    public void initRoleAndUser() {
-
+//
 	        Role adminRole = new Role();
 	        adminRole.setRoleName("Admin");
 	        adminRole.setRoleDescription("Admin role");
-	        roleDao.save(adminRole);
+			boolean a= roleDao.existsById("Admin");
+			if(!a){
+				roleDao.save(adminRole);
+			}
+
 
 	        Role userRole = new Role();
 	        userRole.setRoleName("User");
 	        userRole.setRoleDescription("Default role for newly created record");
 	        roleDao.save(userRole);
 
-	        User adminUser = new User();
-	        adminUser.setUsername("admin123");
-	        adminUser.setPassword(getEncodedPassword("admin@pass"));
-	        adminUser.setName("admin");
-	        adminUser.setEmail("admin@gmail.com");
-	        adminUser.setContactnumber("708965478512");
-	        Set<Role> adminRoles = new HashSet<>();
-	        adminRoles.add(adminRole);
-	        adminUser.setRole(adminRoles);
-	        userDao.save(adminUser);
+			Role vendorRole = new Role();
+			userRole.setRoleName("Vendor");
+			userRole.setRoleDescription("Default role for newly created vendor");
+			roleDao.save(userRole);
+
+//
+//				Optional<Role> userRoleOptional = roleDao.findById("Admin");
+//				if (userRoleOptional.isPresent()) {
+//					User adminUser = new User();
+//					adminUser.setUsername("admin123");
+//					adminUser.setPassword(getEncodedPassword("admin@pass"));
+//					adminUser.setName("admin");
+//					adminUser.setEmail("admin@gmail.com");
+//					adminUser.setContactnumber("708965478512");
+//					Set<Role> adminRoles = new HashSet<>();
+//					adminRoles.add(adminRole);
+//					adminUser.setRole(adminRoles);
+//					userDao.save(adminUser);
+//				} else {
+//					throw new IllegalArgumentException("Role 'User' does not exist in the database.");
+//				}
+//			User adminUser = new User();
+//			Role role = roleDao.findById("Admin").get();
+//			Set<Role> userRoles = new HashSet<>();
+//			userRoles.add(role);
+//			adminUser.setRole(userRoles);
+//			adminUser.setUsername("admin123");
+//			adminUser.setPassword(getEncodedPassword("admin@pass"));
+//			adminUser.setName("admin");
+//			adminUser.setEmail("admin@gmail.com");
+//			adminUser.setContactnumber("708965478512");
+////			return userDao.save(user);
+////
+////			User adminUser = new User();
+////	        adminUser.setUsername("admin123");
+////	        adminUser.setPassword(getEncodedPassword("admin@pass"));
+////	        adminUser.setName("admin");
+////	        adminUser.setEmail("admin@gmail.com");
+////	        adminUser.setContactnumber("708965478512");
+////	        Set<Role> adminRoles = new HashSet<>();
+////	        adminRoles.add(adminRole);
+////	        adminUser.setRole(adminRoles);
+//	       userDao.save(adminUser);
 
 //	        User user = new User();
 //	        user.setUserName("raj123");
@@ -72,4 +110,14 @@ public class UserService {
 	    public String getEncodedPassword(String password) {
 	        return passwordEncoder.encode(password);
 	    }
+
+	public User registerAdmin(User user) {
+		Role role = roleDao.findById("Admin").get();
+		Set<Role> userRoles = new HashSet<>();
+		userRoles.add(role);
+		user.setRole(userRoles);
+		user.setPassword(getEncodedPassword(user.getPassword()));
+
+		return userDao.save(user);
+	}
 }

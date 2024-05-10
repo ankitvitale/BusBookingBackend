@@ -1,5 +1,6 @@
 package com.BusBookingbackend.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 
@@ -7,9 +8,18 @@ import javax.persistence.*;
 
 
 @Entity
-public class User {
+public class User implements Serializable {
+//	public Integer getId() {
+//		return id;
+//	}
 
-    @Id
+	public void setId(Integer id) {
+//		this.id = id;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
     private String username;
     private String name;
     private String email;
@@ -17,14 +27,14 @@ public class User {
     private String contactnumber;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE", joinColumns = {
-            @JoinColumn(name = "USER_ID")
+            @JoinColumn(name = "USER_ID", referencedColumnName = "username")
     },
     inverseJoinColumns = {
             @JoinColumn(name = "ROLE_ID")
     }
            
     )
-    private Set<Role> role;
+    private Set<Role> Role;
 	public String getUsername() {
 		return username;
 	}
@@ -55,11 +65,15 @@ public class User {
 	public void setContactnumber(String contactnumber) {
 		this.contactnumber = contactnumber;
 	}
+
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	public Set<Role> getRole() {
-		return role;
+		return Role;
 	}
 	public void setRole(Set<Role> role) {
-		this.role = role;
+		this.Role = role;
 	}
 
 
