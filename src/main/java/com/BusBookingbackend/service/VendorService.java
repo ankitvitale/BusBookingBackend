@@ -2,7 +2,7 @@ package com.BusBookingbackend.service;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.Optional;
 import com.BusBookingbackend.Model.VendorModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,9 +25,14 @@ public class VendorService {
     private PasswordEncoder passwordEncoder;
     //exception
     public Vendor registerVendor(VendorModel vendormodel) {
-        Vendor vendor= vendorDao.findByUsername(vendormodel.getUsername()).get();
-        if(vendormodel.password== vendormodel.confirm_password && vendor==null){
-            //Vendor vendor = new Vendor();
+        Optional<Vendor> vendor1= vendorDao.findByUsername(vendormodel.getUsername());
+        if(vendormodel.password.equals(vendormodel.confirm_password)  ){
+
+            if(vendor1.isPresent()){
+                throw new RuntimeException("Already Present");
+
+            }
+            Vendor vendor = new Vendor();
             Role role = roleDao.findById("Vendor").get();
             Set<Role> venderRoles = new HashSet<>();
             venderRoles.add(role);
@@ -44,9 +49,8 @@ public class VendorService {
 
             return vendorDao.save(vendor);
         }
-       else throw new RuntimeException("Password not matching");
+        else throw new RuntimeException("Password not matching");
     }
-
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
     }

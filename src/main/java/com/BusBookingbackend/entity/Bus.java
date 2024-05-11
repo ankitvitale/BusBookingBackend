@@ -1,5 +1,6 @@
 package com.BusBookingbackend.entity;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -9,25 +10,25 @@ public class Bus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
-//    private Vendor vendor;
+    @ManyToOne
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
+    private Vendor vendor;
 
     private String bus_number;
     private int total_seats;
     private String type;
 
-    // Constructors, getters, and setters
+
     // Constructors
     public Bus() {
     }
 
-//    public Bus(Vendor vendor, String bus_number, int total_seats, String type) {
-//        this.vendor = vendor;
-//        this.bus_number = bus_number;
-//        this.total_seats = total_seats;
-//        this.type = type;
-//    }
+    public Bus(Vendor vendor, String bus_number, int total_seats, String type) {
+        this.vendor = vendor;
+        this.bus_number = bus_number;
+        this.total_seats = total_seats;
+        this.type = type;
+    }
 
     // Getters and setters
     public Long getId() {
@@ -38,13 +39,13 @@ public class Bus {
         this.id = id;
     }
 
-//    public Vendor getVendor() {
-//        return vendor;
-//    }
-//
-//    public void setVendor(Vendor vendor) {
-//        this.vendor = vendor;
-//    }
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 
     public String getBusNumber() {
         return bus_number;
