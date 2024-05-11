@@ -5,10 +5,7 @@ import com.BusBookingbackend.entity.Bus;
 import com.BusBookingbackend.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -28,4 +25,10 @@ public class BusController {
     public Bus updateBus(@RequestBody Bus bus){
         return busService.updateBus(bus);
     }
+
+    @DeleteMapping("/deleteBus/{id}")
+    public void deleteBus(@PathVariable("id") Long id){
+         busService.deleteBus(id);
+    }
+
 }

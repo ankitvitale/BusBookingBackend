@@ -6,6 +6,8 @@ import com.BusBookingbackend.entity.Bus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BusService {
 
@@ -20,5 +22,11 @@ public class BusService {
     //updatebus
     public Bus updateBus(Bus bus) {
         return busDao.save(bus);
+    }
+
+    //delete
+    public void deleteBus(Long id){
+        Optional<Bus> bus= busDao.findById(id);
+        busDao.delete(bus.get());
     }
 }

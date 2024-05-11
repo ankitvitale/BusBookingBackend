@@ -1,6 +1,7 @@
 package com.BusBookingbackend.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Optional;
 import com.BusBookingbackend.Model.VendorModel;
@@ -53,6 +54,10 @@ public class VendorService {
     }
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public List<Vendor> tobeVerified() {
+        return vendorDao.findUnverifiedVendors();
     }
 }
 
