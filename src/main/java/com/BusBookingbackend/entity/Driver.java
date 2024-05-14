@@ -26,19 +26,32 @@ public class Driver {
 
     private String address;
 
-    // Constructors, getters, and setters
-    // Constructors
+    public Driver(String driverName, String license, String address, String email, String phoneNumber) {
+        this.driver_name = driverName;
+        this.license = license;
+        this.address = address;
+        this.email = email;
+        this.phone_number = phoneNumber;
+
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    private boolean verified;
+
     public Driver() {
     }
 
-    public Driver(Vendor vendor, String driver_name, String license, String email, String phone_number, String address) {
-        this.vendor = vendor;
-        this.driver_name = driver_name;
-        this.license = license;
-        this.email = email;
-        this.phone_number = phone_number;
-        this.address = address;
-    }
+    // Constructors, getters, and setters
+    // Constructors
+
+
 
     // Getters and setters
     public Long getId() {

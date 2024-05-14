@@ -33,6 +33,7 @@ public class VendorService {
                 throw new RuntimeException("Already Present");
 
             }
+
             Vendor vendor = new Vendor();
             Role role = roleDao.findById("Vendor").get();
             Set<Role> venderRoles = new HashSet<>();
@@ -59,5 +60,6 @@ public class VendorService {
     public List<Vendor> tobeVerified() {
         return vendorDao.findUnverifiedVendors();
     }
+
 }
 

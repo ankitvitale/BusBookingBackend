@@ -2,18 +2,18 @@ package com.BusBookingbackend.entity;
 
 public class JwtResponse {
 	
-	private User user;
+	private String  username;
 	private String jwtToken;
-	public JwtResponse(User user, String jwtToken) {
+	public JwtResponse(String username, String jwtToken) {
 		super();
-		this.user = user;
+		this.username = username;
 		this.jwtToken = jwtToken;
 	}
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return username;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(String username) {
+		this.username = username;
 	}
 	public String getJwtToken() {
 		return jwtToken;

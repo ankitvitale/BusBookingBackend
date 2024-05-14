@@ -1,4 +1,3 @@
-
 package com.BusBookingbackend.service;
 
 import java.util.Collection;
@@ -33,6 +32,7 @@ public class JwtService implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private VendorDao vendorDao;
 
@@ -47,62 +47,49 @@ public class JwtService implements UserDetailsService {
         UserDetails userDetails = loadUserByUsername(username);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-        //User user = userDao.findById(username).get();
-        User user = userDao.findByUsername(username).get();
-        return new JwtResponse(user, newGeneratedToken);
+        // Determine if the authenticated entity is a user or a vendor
+        User user = userDao.findByUsername(username).orElse(null);
+        if (user != null) {
+            return new JwtResponse(username, newGeneratedToken);
+        } else {
+            Vendor vendor = vendorDao.findByUsername(username).orElse(null);
+            if (vendor != null) {
+                return new JwtResponse(username, newGeneratedToken);
+            } else {
+                throw new Exception("User or Vendor not found with username: " + username);
+            }
+        }
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        // Attempt to find the user
+        User user = userDao.findByUsername(username).orElse(null);
 
-        Vendor vendor = vendorDao.findByUsername(username)
-                .orElse(null); // Assume vendor might not exist
+        // Attempt to find the vendor if user is not found
+        Vendor vendor = vendorDao.findByUsername(username).orElse(null);
+
+        // If both are null, throw exception
+        if (user == null && vendor == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
 
         Collection<GrantedAuthority> authorities = new HashSet<>();
+        String password;
         if (user != null) {
             user.getRole().forEach(role -> {
                 authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
             });
-        }
-        if (vendor != null) {
-            vendor.getRole
-                    ().forEach(role -> {
+            password = user.getPassword();
+        } else {
+            vendor.getRole().forEach(role -> {
                 authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
             });
+            password = vendor.getPassword();
         }
 
-        if (authorities.isEmpty()) {
-            throw new UsernameNotFoundException("No roles found for user: " + username);
-        }
-
-        return new org.springframework.security.core.userdetails.User(username, user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(username, password, authorities);
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        //  User user = userDao.findById(username).get();
-//        User user = userDao.findByUsername(username).get();
-//
-//        if (user != null) {
-//            return new org.springframework.security.core.userdetails.User(
-//                    user.getUsername(),
-//                    user.getPassword(),
-//                    getAuthority(user)
-//            );
-//        } else {
-//            throw new UsernameNotFoundException("User not found with username: " + username);
-//        }
-//    }
-
-//    private Set getAuthority(User user) {
-//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-//        user.getRole().forEach(role -> {
-//            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
-//        });
-//        return authorities;
-//    }
 
     private void authenticate(String username, String password) throws Exception {
         try {
