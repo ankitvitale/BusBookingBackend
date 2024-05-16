@@ -40,7 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/markVerified/{id}","/addDriver","/authenticate", "/registerNewUser","/registerAdmin", "/registerNewVendor","/addBus","/tobeVerified").permitAll()
+                .authorizeRequests().antMatchers("/tobeVerified","/addDriver","/authenticate", "/registerNewUser","/registerAdmin", "/registerNewVendor").permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -61,5 +61,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
     }
-
 }
