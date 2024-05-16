@@ -47,7 +47,7 @@ public class VendorService {
             vendor.setPhone_number(vendormodel.getPhone_number());
             vendor.setVerification_status(false);
             vendor.setDoc1(vendormodel.getDoc1());
-            vendor.setDoc2(vendor.getDoc2());
+            vendor.setDoc2(vendormodel.getDoc2());
 
             return vendorDao.save(vendor);
         }
@@ -59,6 +59,17 @@ public class VendorService {
 
     public List<Vendor> tobeVerified() {
         return vendorDao.findUnverifiedVendors();
+    }
+
+    public Vendor markVerified(Long id) throws Exception {
+        Optional<Vendor> optionalVendor = vendorDao.findById(id);
+        if (!optionalVendor.isPresent()) {
+            throw new Exception("Vendor with ID " + id + " not found");
+        }
+        Vendor vendor = optionalVendor.get();
+        vendor.setVerification_status(true);
+        vendorDao.save(vendor);
+        return vendor;
     }
 
 }

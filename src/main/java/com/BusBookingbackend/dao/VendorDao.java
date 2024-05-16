@@ -17,6 +17,8 @@ public interface VendorDao extends JpaRepository<Vendor, String> {
 	//Optional<Vende\r> findById(String username);
     Optional<Vendor> findByUsername(String username);
 
+
+    Optional<Vendor> findById(long id);
   //  List<Vendor> findAllByVerificationStatus(boolean b);
 
     @Query("SELECT v FROM Vendor v WHERE v.verification_status = false")

@@ -7,10 +7,7 @@ import com.BusBookingbackend.entity.Vendor;
 import com.BusBookingbackend.service.UserService;
 import com.BusBookingbackend.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,4 +33,9 @@ public class VendorController {
     public List<Vendor> tobeVerified(){
         return vendorService.tobeVerified();
     }
+
+    @PostMapping("/markVerified/{id}")
+    public Vendor markVerified(@PathVariable("id") Long id) throws Exception {
+        return vendorService.markVerified(id);
+    }//? not working
 }
