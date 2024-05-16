@@ -14,11 +14,11 @@ public class BusController {
     BusService busService;
 
 
-//    @PreAuthorize("hasRole('Vendor')")
+    @PreAuthorize("hasRole('Vendor')")
     @PostMapping("/addBus")
-    public Bus addBus(@RequestBody Bus bus){
+    public Bus addBus(@RequestBody BusModel busModel){
 
-        return busService.addBus(bus);
+        return busService.addBus(busModel);
     }
 
     @PutMapping("/updateBus/{id}")
