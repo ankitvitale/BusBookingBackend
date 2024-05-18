@@ -1,12 +1,15 @@
 package com.BusBookingbackend.configuration;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.BusBookingbackend.dao.VendorDao;
+import com.BusBookingbackend.entity.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +31,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private VendorDao vendorDao;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -62,6 +68,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+
+//            String username1=((Vendor) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+//            Vendor vendor= vendorDao.findByUsername(username1);
+//            if(vendor!=null && vendor.getVerification_status()){
+//                SecurityContextHolder.clearContext();
+//                response.sendError(HttpServletResponse.SC_FORBIDDEN, "User is blocked");
+//                return;
+//            }
+
         }
         filterChain.doFilter(request, response);
 

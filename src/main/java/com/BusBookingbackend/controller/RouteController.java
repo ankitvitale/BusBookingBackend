@@ -1,9 +1,12 @@
 package com.BusBookingbackend.controller;
 
 
+import com.BusBookingbackend.Model.RouteModel;
+import com.BusBookingbackend.entity.RouteResponse;
 import com.BusBookingbackend.entity.Route;
 import com.BusBookingbackend.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,9 @@ public class RouteController {
 
     @PreAuthorize("hasRole('Vendor')")
     @PostMapping("/createroute")
-    public Route createRoute(@RequestBody Route route) {
-        return routeService.addRoute(route);
+    public RouteResponse createRoute(@RequestBody RouteModel routeModel) {
+        RouteResponse routeResponse=routeService.addRoute(routeModel);
+        return routeResponse ;
     }
 
     @PreAuthorize("hasRole('Vendor')")

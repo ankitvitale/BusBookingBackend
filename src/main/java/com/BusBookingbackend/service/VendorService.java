@@ -17,13 +17,16 @@ import com.BusBookingbackend.entity.Vendor;
 @Service
 public class VendorService {
     @Autowired
-    private VendorDao vendorDao;
+    private static VendorDao vendorDao;
 
     @Autowired
     private RoleDao roleDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
+
     //exception
     public Vendor registerVendor(VendorModel vendormodel) {
         Optional<Vendor> vendor1= vendorDao.findByUsername(vendormodel.getUsername());
@@ -72,5 +75,18 @@ public class VendorService {
         return vendor;
     }
 
+
+//    public Optional<Vendor> findById(Long id) {
+//        return vendorDao.findById(id);
+//    }
+//    public static void blockVendor(long id, boolean verification_status) {
+//        Optional<Vendor> vendorOpt = vendorDao.findById(id);
+//        if(vendorOpt.isPresent()){
+//            Vendor vendor=vendorOpt.get();
+//            vendor.setVerification_status(verification_status);
+//            vendorDao.save(vendor);
+//        }
+//
+//    }
 }
 

@@ -7,6 +7,7 @@ import com.BusBookingbackend.entity.Vendor;
 import com.BusBookingbackend.service.UserService;
 import com.BusBookingbackend.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,16 @@ public class VendorController {
         return vendorService.tobeVerified();
     }
 
+    @PreAuthorize("hasRole('Vendor')")
     @PostMapping("/markVerified/{id}")
     public Vendor markVerified(@PathVariable("id") Long id) throws Exception {
         return vendorService.markVerified(id);
     }//? not working
+
+//    @PreAuthorize("hasRole('Admin')")
+//    @PutMapping("/vendorblock/{id}")
+//public String blockVendor(@PathVariable long id){
+//        VendorService.blockVendor(id, true);
+//        return "Vendor block Successfully";
+//}
 }
