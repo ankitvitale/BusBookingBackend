@@ -1,6 +1,7 @@
 package com.BusBookingbackend.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,17 +13,19 @@ public class Route {
 
     private String origin;
     private String destination;
-    private int distance;
+    private Double distance;
 
-    @ElementCollection
-    private Map<Integer,String> stops;
+//    @OneToMany(mappedBy = "route")
+//    private List<RouteStop> routeStops;
+
+
     public Route(){}
-    public Route(Long id, String origin, String destination, int distance, Map<Integer, String> stops) {
-        this.id = id;
+    public Route( String origin, String destination, Double distance) {
+        //this.id = id;
         this.origin = origin;
         this.destination = destination;
         this.distance = distance;
-        this.stops = stops;
+        //this.routeStops = routeStops;
     }
 
     public Long getId() {
@@ -49,19 +52,19 @@ public class Route {
         this.destination = destination;
     }
 
-    public int getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
-    public Map<Integer, String> getStops() {
-        return stops;
-    }
-
-    public void setStops(Map<Integer, String> stops) {
-        this.stops = stops;
-    }
+//    public List<RouteStop> getRouteStops() {
+//        return routeStops;
+//    }
+//
+//    public void setRouteStops(List<RouteStop> routeStops) {
+//        this.routeStops = routeStops;
+//    }
 }

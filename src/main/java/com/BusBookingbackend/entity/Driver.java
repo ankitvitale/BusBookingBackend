@@ -109,4 +109,7 @@ public class Driver {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public void setVerification_status(boolean b) {
+    }
 }
