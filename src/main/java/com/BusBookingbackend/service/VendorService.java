@@ -1,11 +1,14 @@
 package com.BusBookingbackend.service;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Optional;
 import com.BusBookingbackend.Model.VendorModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import com.BusBookingbackend.dao.RoleDao;
 import com.BusBookingbackend.dao.VendorDao;
 import com.BusBookingbackend.entity.Role;
 import com.BusBookingbackend.entity.Vendor;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class VendorService {
@@ -26,13 +31,12 @@ public class VendorService {
     private PasswordEncoder passwordEncoder;
 
 
-
     //exception
     public Vendor registerVendor(VendorModel vendormodel) {
-        Optional<Vendor> vendor1= vendorDao.findByUsername(vendormodel.getUsername());
-        if(vendormodel.password.equals(vendormodel.confirm_password)  ){
+        Optional<Vendor> vendor1 = vendorDao.findByUsername(vendormodel.getUsername());
+        if (vendormodel.password.equals(vendormodel.confirm_password)) {
 
-            if(vendor1.isPresent()){
+            if (vendor1.isPresent()) {
                 throw new RuntimeException("Already Present");
 
             }
@@ -53,9 +57,9 @@ public class VendorService {
             vendor.setDoc2(vendormodel.getDoc2());
 
             return vendorDao.save(vendor);
-        }
-        else throw new RuntimeException("Password not matching");
+        } else throw new RuntimeException("Password not matching");
     }
+
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
     }
@@ -76,17 +80,10 @@ public class VendorService {
     }
 
 
-//    public Optional<Vendor> findById(Long id) {
-//        return vendorDao.findById(id);
-//    }
-//    public static void blockVendor(long id, boolean verification_status) {
-//        Optional<Vendor> vendorOpt = vendorDao.findById(id);
-//        if(vendorOpt.isPresent()){
-//            Vendor vendor=vendorOpt.get();
-//            vendor.setVerification_status(verification_status);
-//            vendorDao.save(vendor);
-//        }
-//
-//    }
+
+
+
 }
+
+
 

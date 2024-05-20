@@ -35,15 +35,15 @@ public class Driver {
 
     }
 
-    public boolean isVerified() {
+    public Boolean isVerified() {
         return verified;
     }
 
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
 
-    private boolean verified;
+    private Boolean verified;
 
     public Driver() {
     }

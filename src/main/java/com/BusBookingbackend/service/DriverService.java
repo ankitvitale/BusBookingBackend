@@ -48,7 +48,7 @@ public class DriverService {
             throw new Exception("Vendor with ID " + id + " not found");
         }
         Driver dirver = optionalVendor.get();
-        dirver.setVerification_status(true);
+        dirver.setVerified(true);
         dirver.setVendor(vendor);
         driverDao.save(dirver);
         return dirver;

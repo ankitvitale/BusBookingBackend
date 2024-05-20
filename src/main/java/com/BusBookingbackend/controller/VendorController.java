@@ -41,10 +41,7 @@ public class VendorController {
         return vendorService.markVerified(id);
     }//? not working
 
-//    @PreAuthorize("hasRole('Admin')")
-//    @PutMapping("/vendorblock/{id}")
-//public String blockVendor(@PathVariable long id){
-//        VendorService.blockVendor(id, true);
-//        return "Vendor block Successfully";
-//}
+
+
+
 }

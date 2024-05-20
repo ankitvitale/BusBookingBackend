@@ -32,6 +32,8 @@ public class DriverController {
     public List<Driver> tobeVerifiedDriver(){
       return driverService.tobeVerifiedDriver ();
     }
+
+    @PreAuthorize("hasRole('Vendor')")
     @PostMapping("/markVerifiedDriver/{id}")
     public Driver markVerifiedDriver(@PathVariable("id") Long id) throws Exception {
         return driverService.markVerifiedDriver(id);

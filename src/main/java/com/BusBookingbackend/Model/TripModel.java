@@ -45,9 +45,9 @@ public class TripModel {
         this.time = time;
     }
 
-    private Long busId;
-    private Long driverId;
-    private Long routeId;
-    private Date date;
-    private Time time;
+    public Long busId;
+    public Long driverId;
+    public Long routeId;
+    public Date date;
+    public Time time;
 }

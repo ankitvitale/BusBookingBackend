@@ -69,14 +69,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
 
-//            String username1=((Vendor) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-//            Vendor vendor= vendorDao.findByUsername(username1);
-//            if(vendor!=null && vendor.getVerification_status()){
-//                SecurityContextHolder.clearContext();
-//                response.sendError(HttpServletResponse.SC_FORBIDDEN, "User is blocked");
-//                return;
-//            }
-
         }
         filterChain.doFilter(request, response);
 
