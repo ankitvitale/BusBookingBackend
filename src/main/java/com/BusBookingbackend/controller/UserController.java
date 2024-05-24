@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.BusBookingbackend.entity.User;
 import com.BusBookingbackend.service.UserService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -38,5 +40,16 @@ public class UserController {
     @PreAuthorize("hasRole('User')")
     public String forUser(){
         return "This URL is only accessible to the user";
+    }
+
+
+    @GetMapping("/getAllUser")
+    @PreAuthorize("hasRole('Vendor')")
+
+    public List<User> getAllUser(){
+
+        return userService.getAllUser();
+
+
     }
 }

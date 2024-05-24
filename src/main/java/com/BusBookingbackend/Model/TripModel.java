@@ -4,6 +4,13 @@ import java.sql.Time;
 import java.sql.Date;
 
 public class TripModel {
+    public long id;
+    public Long busId;
+    public Long driverId;
+    public Long routeId;
+    public Date date;
+    public Time time;
+    private EmailMessage emailMessage;
 
     public Long getBusId() {
         return busId;
@@ -44,10 +51,27 @@ public class TripModel {
     public void setTime(Time time) {
         this.time = time;
     }
+    public EmailMessage getEmailMessage() {
+        return emailMessage;
+    }
 
-    public Long busId;
-    public Long driverId;
-    public Long routeId;
-    public Date date;
-    public Time time;
+    public void setEmailMessage(EmailMessage emailMessage) {
+        this.emailMessage = emailMessage;
+    }
+    public long getId() {return id;}
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "TripModel{" +
+                "busId=" + busId +
+                ", driverId=" + driverId +
+                ", routeId=" + routeId +
+                ", date=" + date +
+                ", time=" + time +
+                '}';
+    }
 }

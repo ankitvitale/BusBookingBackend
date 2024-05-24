@@ -39,6 +39,7 @@ public class Trip {
     private Date date;
 
     private Time time;
+    public Trip(){}
 
     public Trip(Bus bus, Driver driver, Route route, java.util.Date date, Time time) {
     }
@@ -75,4 +76,27 @@ public class Trip {
         this.bus = bus;
     }
 
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
 }

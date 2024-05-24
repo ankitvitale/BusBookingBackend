@@ -3,9 +3,19 @@ package com.BusBookingbackend.dao;
 import com.BusBookingbackend.entity.Bus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+
+import java.util.List;
 import java.util.Optional;
-
+@Repository
 public interface BusDao extends JpaRepository<Bus, Long> {
-    Optional<Bus> findById(Long id);
+   // Optional<Bus> findById(Long id);
+//    @Query(value = "select * from bus where id = ?1" ,nativeQuery = true)
+//    Object[] getBus(Long id);
+//
+//    @Query(value = "select * from vendor where id = ?1" ,nativeQuery = true)
+//    Object[] getVendor(Long id);
+
 }

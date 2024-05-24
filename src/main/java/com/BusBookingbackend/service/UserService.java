@@ -1,6 +1,7 @@
 package com.BusBookingbackend.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -75,4 +76,7 @@ public class UserService {
 	}
 
 
+    public List<User> getAllUser() {
+			return userDao.findAll();
+    }
 }

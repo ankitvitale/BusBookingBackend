@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 
 public class BusController {
@@ -30,5 +32,11 @@ public class BusController {
     public void deleteBus(@PathVariable("id") Long id){
          busService.deleteBus(id);
     }
+    @PreAuthorize("hasRole('Vendor')")
+    @GetMapping("/Bus-without-trips")
+    public List<Bus> getBusWithOutTrip(){
+        return busService.getBusWithOutTrip();
+    }
+
 
 }

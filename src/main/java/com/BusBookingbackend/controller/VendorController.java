@@ -39,9 +39,6 @@ public class VendorController {
     @PostMapping("/markVerified/{id}")
     public Vendor markVerified(@PathVariable("id") Long id) throws Exception {
         return vendorService.markVerified(id);
-    }//? not working
-
-
-
+    }
 
 }

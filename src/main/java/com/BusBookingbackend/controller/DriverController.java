@@ -39,4 +39,10 @@ public class DriverController {
         return driverService.markVerifiedDriver(id);
     }//? not workin
 
+    @PreAuthorize("hasRole('Vendor')")
+    @GetMapping("/drivers-without-trips")
+    public List<Driver> getDriversWithoutTrips() {
+        return driverService.getDriversWithoutTrips();
+    }
+
 }

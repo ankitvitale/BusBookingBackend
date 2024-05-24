@@ -8,15 +8,15 @@ public class Bus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @ManyToOne
     @JoinColumn(name = "vendor_id", referencedColumnName = "id")
-    private Vendor vendor;
+    public Vendor vendor;
 
-    private String bus_number;
-    private int total_seats;
-    private String type;
+    public String bus_number;
+    public int total_seats;
+    public String type;
 
 
     // Constructors
