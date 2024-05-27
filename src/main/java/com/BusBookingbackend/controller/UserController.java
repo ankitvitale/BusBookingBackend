@@ -4,10 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.BusBookingbackend.entity.User;
 import com.BusBookingbackend.service.UserService;
@@ -28,6 +25,11 @@ public class UserController {
     @PostMapping({"/registerNewUser"})
     public User registerNewUser(@RequestBody User user) {
         return userService.registerNewUser(user);
+    }
+
+    @PostMapping({"/updateUser/{id}"})
+    public User updateUser(@PathVariable("id") Long id,@RequestBody User user) {
+        return userService.updateUser(id,user);
     }
 
     @GetMapping({"/forAdmin"})

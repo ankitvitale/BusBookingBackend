@@ -9,14 +9,6 @@ import javax.persistence.*;
 
 @Entity
 public class User implements Serializable {
-//	public Integer getId() {
-//		return id;
-//	}
-
-	public void setId(Integer id) {
-//		this.id = id;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -65,10 +57,6 @@ public class User implements Serializable {
 	public void setContactnumber(String contactnumber) {
 		this.contactnumber = contactnumber;
 	}
-
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 	public Set<Role> getRole() {
 		return Role;
 	}

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +29,23 @@ public class TripService {
     private RouteDao routeDao;
     @Autowired
     private TripDao tripDao;
+
+
+    //NOT TESTED
+    public List<Trip> findTrip(String start, String destination, Date date) {
+        List<Trip> TripsByDate = tripDao.findAllByDate(date);
+        List<Trip> Trips = new ArrayList<>(); // Initialize as an empty list
+        if (TripsByDate != null) { // Check if TripsByDate is not null
+            for (Trip t : TripsByDate) {
+                Route route = t.getRoute();
+                if (route != null && route.getOrigin().equals(start) && route.getDestination().equals(destination)) {
+                    Trips.add(t);
+                }
+            }
+        }
+        return Trips;
+    }
+
     public Trip addTrip(TripModel tripModel) throws Exception {
 
         String currentUser = JwtRequestFilter.CURRENT_USER;

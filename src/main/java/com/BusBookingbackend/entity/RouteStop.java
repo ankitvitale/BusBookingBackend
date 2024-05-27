@@ -7,7 +7,6 @@ public class RouteStop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private int stop_sequence;
     private String  stop_name;
     private Double km;
@@ -15,14 +14,6 @@ public class RouteStop {
     @JoinColumn(name = "route_id")
     private Route route;
     public RouteStop(){}
-//    public RouteStop(Long id, Route route, int stop_sequence, String stop_name, Double km) {
-//        this.id = id;
-//        this.route = route;
-//        this.stop_sequence = stop_sequence;
-//        this.stop_name = stop_name;
-//        this.km = km;
-//    }
-
     public RouteStop(Route route, int i, String name, Double km) {
 
         this.route = route;

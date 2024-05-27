@@ -27,7 +27,7 @@ public class Trip {
     private Route route;
 
     public Trip(Vendor vendor, Bus bus, Driver driver, Route route, Date date, Time time) {
-        this.id = id;
+        //this.id = id;
         this.vendor = vendor;
         this.bus = bus;
         this.driver = driver;
@@ -41,8 +41,7 @@ public class Trip {
     private Time time;
     public Trip(){}
 
-    public Trip(Bus bus, Driver driver, Route route, java.util.Date date, Time time) {
-    }
+
 
     public Vendor getVendor() {
         return vendor;

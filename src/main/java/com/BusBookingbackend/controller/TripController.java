@@ -2,8 +2,10 @@ package com.BusBookingbackend.controller;
 
 import com.BusBookingbackend.Model.EmailMessage;
 import com.BusBookingbackend.Model.TripModel;
+import com.BusBookingbackend.Model.TripRequest;
 import com.BusBookingbackend.dao.EmailSenderServiceDao;
 import com.BusBookingbackend.dao.VendorDao;
+import com.BusBookingbackend.entity.Trip;
 import com.BusBookingbackend.service.DriverService;
 import com.BusBookingbackend.service.MailService;
 import com.BusBookingbackend.service.TripService;
@@ -11,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 
 @RestController
@@ -39,6 +43,7 @@ public class TripController {
     public TripController(EmailSenderServiceDao emailSenderServicedao) {
         this.emailSenderServicedao = emailSenderServicedao;
     }
+
     @PreAuthorize("hasRole('Vendor')")
     @PostMapping("/addTrip")
     public String addTrip(@RequestBody TripModel tripModel) throws Throwable {
@@ -71,12 +76,17 @@ public class TripController {
 
         }
     }
+    @GetMapping("/findTrip")
+    public List<Trip> findTrip(@RequestBody TripRequest tripRequest){
+        return tripService.findTrip(tripRequest.getStart() ,tripRequest.getDestination(),tripRequest.getDate());
+    }
     private void scheduleTripDeletion(TripModel tripModel) {
         taskScheduler.schedule(() -> {
             tripService.deleteTrip(tripModel.getId());
         },
                 tripModel.getTime());
     }
+
 
 
 }

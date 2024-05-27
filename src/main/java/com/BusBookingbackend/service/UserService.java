@@ -79,4 +79,12 @@ public class UserService {
     public List<User> getAllUser() {
 			return userDao.findAll();
     }
+
+	public User updateUser(Long id, User user) {
+			Optional<User> user1= userDao.findById(id);
+			if(user1.isPresent()){
+				return userDao.save(user);
+			}
+			return null;
+	}
 }
